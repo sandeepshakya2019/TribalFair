@@ -1,26 +1,5 @@
-const visitorTips = [
-  ["Getting here", "Keylong is connected by road from Manali via the Atal Tunnel. The nearest airport is Bhuntar."],
-  ["Stay", "Book hotels, homestays and circuit houses early. Keylong and nearby villages offer varied options."],
-  ["Weather", "Pack warm layers, sun protection and comfortable walking shoes for changing mountain weather."],
-  ["Travel kindly", "Carry reusable bottles, respect sacred places, ask before photographing and leave no trace."],
-];
+const visitorTips = [["Getting here", "Keylong is connected by road from Manali via the Atal Tunnel. The nearest airport is Bhuntar."], ["Stay", "Book hotels, homestays and circuit houses early. Keylong and nearby villages offer varied options."], ["Weather", "Pack warm layers, sun protection and comfortable walking shoes for changing mountain weather."], ["Travel kindly", "Carry reusable bottles, respect sacred places, ask before photographing and leave no trace."]];
 
 export default function VisitorInfo() {
-  return (
-    <section className="visit section" id="visit">
-      <div className="visit-grid shell">
-        <div className="visit-copy">
-          <p className="eyebrow">Before you set out</p>
-          <h2>Plan your journey<br />to Keylong.</h2>
-          <p>September brings clear skies and cool mountain evenings. Roads are scenic, travel is slower, and advance planning makes every moment easier.</p>
-          <a className="gold-button" href="https://maps.google.com/?q=Keylong+Himachal+Pradesh" target="_blank" rel="noreferrer">Open in Maps <span>↗</span></a>
-        </div>
-        <div className="info-grid">
-          {visitorTips.map(([title, description], index) => (
-            <article key={title}><span>{String(index + 1).padStart(2, "0")}</span><h3>{title}</h3><p>{description}</p></article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+  return <section className="visit section" id="visit"><div className="visit-grid shell"><div className="visit-copy"><p className="eyebrow">Before you set out</p><h2>Plan your journey<br />to Keylong.</h2><p>August brings active mountain weather and cool evenings. Roads are scenic, travel is slower, and advance planning makes every moment easier.</p><a className="gold-button" href="https://maps.google.com/?q=Keylong+Himachal+Pradesh" target="_blank" rel="noreferrer">Open in Maps <span>↗</span></a></div><div className="info-grid">{visitorTips.map(([title, description], index) => <article key={title}><span>{String(index + 1).padStart(2, "0")}</span><h3>{title}</h3><p>{description}</p></article>)}</div></div></section>;
 }
