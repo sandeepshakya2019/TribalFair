@@ -1,0 +1,480 @@
+/* =====================================
+   TRIBAL FAIR HEADER — SOLID BACKGROUND
+===================================== */
+
+.official-bar {
+  position: relative;
+  z-index: 99999;
+  height: 48px;
+  background: #030b1a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.official-inner {
+  width: min(1440px, calc(100% - 80px));
+  height: 100%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.emblem {
+  color: #e8c77d;
+  font-size: 20px;
+}
+
+.official-link {
+  margin-left: auto;
+  color: #d7dce5;
+}
+
+.site-header {
+  /* position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999999; */
+  width: 100%;
+  padding: 14px 5%;
+  background: #051224;
+  border-bottom: 1px solid rgba(255, 185, 70, 0.3);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.24);
+  animation: headerSlideDown 0.8s ease-out;
+  transition:
+    padding 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.site-header::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #f6a623,
+    #ffd875,
+    #f6a623,
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: borderFlow 4s linear infinite;
+}
+
+.header-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+/* Brand */
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #ffffff;
+  font-family: inherit;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  animation: brandAppear 1s ease-out;
+}
+
+.mountain-mark {
+  display: block;
+  width: 56px;
+  height: 56px;
+  flex: 0 0 56px;
+  padding: 3px;
+  object-fit: contain;
+  background: #ffffff;
+  border: 2px solid rgba(255, 196, 92, 0.8);
+  border-radius: 50%;
+  filter: drop-shadow(0 0 8px rgba(255, 174, 55, 0.4));
+  animation: logoFloat 3s ease-in-out infinite;
+  transition:
+    transform 0.4s ease,
+    filter 0.4s ease;
+}
+
+.header-brand:hover .mountain-mark {
+  transform: rotate(8deg) scale(1.12);
+  filter: drop-shadow(0 0 15px rgba(255, 174, 55, 0.9));
+}
+
+.brand-text {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.brand-text strong {
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #ffffff, #ffd477, #ffffff);
+  background-size: 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: textShimmer 4s linear infinite;
+}
+
+.brand-text span {
+  margin-top: 3px;
+  color: #e8b75d;
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Navigation */
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.header-nav a,
+.header-nav > button:not(.header-button) {
+  position: relative;
+  padding: 9px 2px;
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.86);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.header-nav a::before,
+.header-nav > button:not(.header-button)::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #ff9f1c, #ffe09a);
+  transform: translateX(-50%);
+  transition: width 0.35s ease;
+}
+
+.header-nav a:hover,
+.header-nav > button:not(.header-button):hover {
+  color: #ffd477;
+  transform: translateY(-3px);
+}
+
+.header-nav a:hover::before,
+.header-nav a.active::before,
+.header-nav > button:not(.header-button):hover::before {
+  width: 100%;
+}
+
+/* Main action button */
+.header-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  overflow: hidden;
+  padding: 12px 22px;
+  border: 1px solid #ffb53f;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #f28c18, #ffc45c);
+  color: #07182b;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 6px 22px rgba(246, 166, 35, 0.3);
+  animation: buttonPulse 2.5s ease-in-out infinite;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.header-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 70%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.7),
+    transparent
+  );
+  transform: skewX(-25deg);
+  animation: buttonShine 3.5s infinite;
+}
+
+.header-button:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 10px 32px rgba(255, 181, 63, 0.55);
+}
+
+.header-button > span {
+  transition: transform 0.3s ease;
+}
+
+.header-button:hover > span {
+  transform: translateX(5px);
+}
+
+/* Hamburger */
+.menu-button {
+  display: none;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  border: 1px solid rgba(255, 196, 92, 0.55);
+  border-radius: 10px;
+  background: #10233d;
+  cursor: pointer;
+}
+
+.menu-button span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  margin: 5px 0;
+  border-radius: 4px;
+  background: #ffd477;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.menu-button.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.menu-button.active span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+.menu-button.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Mobile navigation */
+@media (max-width: 900px) {
+  .official-inner {
+    width: calc(100% - 40px);
+  }
+
+  .site-header {
+    padding: 11px 20px;
+    background: #051224;
+  }
+
+  .mountain-mark {
+    width: 46px;
+    height: 46px;
+    flex-basis: 46px;
+  }
+
+  .brand-text strong {
+    font-size: 0.9rem;
+  }
+
+  .brand-text span {
+    font-size: 0.6rem;
+  }
+
+  .menu-button {
+    display: block;
+    margin-left: auto;
+  }
+
+  .header-nav {
+    position: absolute;
+    top: calc(100% + 1px);
+    right: 16px;
+    left: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    padding: 18px;
+    border: 1px solid rgba(255, 196, 92, 0.3);
+    border-radius: 0 0 18px 18px;
+    background: #051224;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.35);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-15px);
+    pointer-events: none;
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease,
+      visibility 0.3s ease;
+  }
+
+  .header-nav.open {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .header-nav > button:not(.header-button),
+  .header-nav a:not(.header-button) {
+    width: 100%;
+    padding: 13px;
+    text-align: left;
+  }
+
+  .header-nav > button:not(.header-button)::before,
+  .header-nav a:not(.header-button)::before {
+    right: auto;
+    left: 13px;
+    transform: none;
+  }
+
+  .header-nav > button:not(.header-button):hover::before,
+  .header-nav a:not(.header-button):hover::before {
+    width: 45px;
+  }
+
+  .header-button {
+    width: 100%;
+    margin-top: 8px;
+    padding: 10px 15px;
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .official-bar {
+    height: auto;
+    min-height: 42px;
+  }
+
+  .official-inner {
+    width: calc(100% - 28px);
+    padding: 8px 0;
+    font-size: 11px;
+  }
+
+  .brand-text span {
+    display: none;
+  }
+
+  .header-nav {
+    right: 10px;
+    left: 10px;
+  }
+}
+
+/* Animations */
+@keyframes headerSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes brandAppear {
+  from {
+    opacity: 0;
+    transform: translateX(-35px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes logoFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes textShimmer {
+  from {
+    background-position: 200% center;
+  }
+  to {
+    background-position: -200% center;
+  }
+}
+
+@keyframes borderFlow {
+  from {
+    background-position: 200% center;
+  }
+  to {
+    background-position: -200% center;
+  }
+}
+
+@keyframes buttonPulse {
+  0%,
+  100% {
+    box-shadow: 0 6px 22px rgba(246, 166, 35, 0.3);
+  }
+  50% {
+    box-shadow: 0 6px 32px rgba(255, 181, 63, 0.65);
+  }
+}
+
+@keyframes buttonShine {
+  0% {
+    left: -120%;
+  }
+  45%,
+  100% {
+    left: 150%;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .site-header,
+  .header-brand,
+  .mountain-mark,
+  .brand-text strong,
+  .header-button,
+  .header-button::before,
+  .site-header::after {
+    animation: none;
+  }
+}
