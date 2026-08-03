@@ -95,9 +95,9 @@ export default function Footer() {
             </svg>
           </a>
 
-          <a href="mailto:tribalfair@example.com" className="footer-email">
+          {/* <a href="mailto:tribalfair@example.com" className="footer-email">
             tribalfair@example.com
-          </a>
+          </a> */}
         </div>
       </div>
 
