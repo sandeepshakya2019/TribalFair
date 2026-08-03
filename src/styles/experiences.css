@@ -217,3 +217,196 @@
     transition: none;
   }
 }
+
+/* ---------- Poster entrance animation ---------- */
+
+.poster-card {
+  --delay: 0s;
+  opacity: 0;
+  transform: translateY(45px) scale(0.96);
+  animation: posterEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) var(--delay)
+    forwards;
+  will-change: transform, opacity;
+}
+
+.poster-card:nth-child(1) {
+  --delay: 0.05s;
+}
+
+.poster-card:nth-child(2) {
+  --delay: 0.15s;
+}
+
+.poster-card:nth-child(3) {
+  --delay: 0.25s;
+}
+
+.poster-card:nth-child(4) {
+  --delay: 0.35s;
+}
+
+.poster-card:nth-child(4n + 1) {
+  --delay: 0.05s;
+}
+
+.poster-card:nth-child(4n + 2) {
+  --delay: 0.15s;
+}
+
+.poster-card:nth-child(4n + 3) {
+  --delay: 0.25s;
+}
+
+.poster-card:nth-child(4n + 4) {
+  --delay: 0.35s;
+}
+
+@keyframes posterEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(45px) scale(0.96);
+    filter: blur(5px);
+  }
+
+  65% {
+    opacity: 1;
+    transform: translateY(-4px) scale(1.01);
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* ---------- Poster hover animation ---------- */
+
+.poster-card:hover {
+  transform: translateY(-9px) rotate(-0.4deg);
+  box-shadow:
+    0 24px 45px rgba(13, 38, 59, 0.2),
+    0 8px 18px rgba(13, 38, 59, 0.1);
+}
+
+.poster-card:nth-child(even):hover {
+  transform: translateY(-9px) rotate(0.4deg);
+}
+
+.event-poster-image {
+  transition:
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.45s ease;
+}
+
+.poster-card:hover .event-poster-image {
+  transform: scale(1.045);
+  filter: saturate(1.08) contrast(1.025);
+}
+
+/* ---------- Moving light effect ---------- */
+
+.poster-image-wrap {
+  position: relative;
+}
+
+.poster-image-wrap::after {
+  position: absolute;
+  top: -30%;
+  left: -75%;
+  width: 45%;
+  height: 160%;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 255, 255, 0.38),
+    transparent
+  );
+  content: "";
+  pointer-events: none;
+  transform: rotate(12deg);
+  transition: left 0.8s ease;
+}
+
+.poster-card:hover .poster-image-wrap::after {
+  left: 135%;
+}
+
+/* ---------- Poster information animation ---------- */
+
+.poster-actions h3 {
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.poster-card:hover .poster-actions h3 {
+  color: var(--coral, #b3482c);
+  transform: translateX(3px);
+}
+
+.view-poster-link span {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.view-poster-link:hover span {
+  transform: translate(3px, -3px);
+}
+
+/* ---------- Heading entrance ---------- */
+
+.events-section .section-heading {
+  animation: headingReveal 0.8s ease both;
+}
+
+@keyframes headingReveal {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Disable heavier effects on touch devices */
+
+@media (hover: none) {
+  .poster-card:hover,
+  .poster-card:nth-child(even):hover {
+    transform: none;
+  }
+
+  .poster-card:hover .event-poster-image {
+    transform: none;
+    filter: none;
+  }
+
+  .poster-image-wrap::after {
+    display: none;
+  }
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .events-section .section-heading,
+  .poster-card {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    animation: none;
+  }
+
+  .poster-card,
+  .event-poster-image,
+  .poster-actions h3,
+  .view-poster-link span,
+  .poster-image-wrap::after {
+    transition: none;
+  }
+}
