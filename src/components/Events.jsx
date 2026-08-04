@@ -6,7 +6,7 @@ export default function Events() {
       <div className="section-heading">
         <div>
           <p className="eyebrow dark">Ready for the arena?</p>
-          <h2>Featured Games</h2>
+          <h2>Featured Events</h2>
         </div>
       </div>
 
@@ -32,7 +32,7 @@ export default function Events() {
                 rel="noopener noreferrer"
                 aria-label={`View full ${event.eventName} poster`}
               >
-                View full poster
+                View
                 <span aria-hidden="true">↗</span>
               </a>
             </div>

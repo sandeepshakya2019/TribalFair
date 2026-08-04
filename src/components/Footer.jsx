@@ -65,7 +65,7 @@ export default function Footer() {
               </span>
             </li>
 
-            <li>
+            {/* <li>
               <span className="footer-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24">
                   <path d="M7.5 4.5 10 9 7.8 11a16 16 0 0 0 5.2 5.2l2-2.2 4.5 2.5v3a2 2 0 0 1-2 2C9.2 21.5 2.5 14.8 2.5 6.5a2 2 0 0 1 2-2h3Z" />
@@ -76,7 +76,7 @@ export default function Footer() {
                 <small>Contact us</small>
                 <a href="tel:+919816234567">+91 XXXXX XXXXX</a>
               </span>
-            </li>
+            </li> */}
           </ul>
         </div>
 
@@ -88,7 +88,7 @@ export default function Footer() {
             high-altitude arena.
           </p>
 
-          <a href="#programme" className="footer-button">
+          <a href="#schedule" className="footer-button">
             Explore programme
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="m9 18 6-6-6-6" />
