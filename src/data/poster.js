@@ -2,14 +2,6 @@
 
 export const eventPosters = [
   {
-    id: 1,
-    eventName: "Badminton",
-    category: "Sports",
-    poster: "/images/posters/Sports/badminton-poster.jpg",
-    description:
-      "Compete with speed, control and precision in the Tribal Fair Badminton Tournament.",
-  },
-  {
     id: 2,
     eventName: "Cricket",
     category: "Sports",
@@ -55,5 +47,13 @@ export const eventPosters = [
     category: "Cultural",
     poster: "/images/posters/Sports/tambola-poster.png",
     description: "Enjoy the excitement of Tambola in the Tribal Fair!",
+  },
+  {
+    id: 1,
+    eventName: "Badminton",
+    category: "Sports",
+    poster: "/images/posters/Sports/badminton-poster.jpg",
+    description:
+      "Compete with speed, control and precision in the Tribal Fair Badminton Tournament.",
   },
 ];
