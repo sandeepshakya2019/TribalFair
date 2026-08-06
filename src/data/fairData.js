@@ -41,26 +41,3 @@ export const fairDays = [
     ],
   },
 ];
-
-// export const highlights = [
-//   {
-//     icon: "✦",
-//     title: "Living Culture",
-//     text: "Rare dances, music and oral traditions—shared by the communities who keep them alive.",
-//   },
-//   {
-//     icon: "◇",
-//     title: "Mountain Flavours",
-//     text: "Warm local dishes, barley brews and recipes shaped by life in the high Himalaya.",
-//   },
-//   {
-//     icon: "⌁",
-//     title: "Handmade Heritage",
-//     text: "Meet weavers, woodcarvers and artisans behind Lahaul & Spiti's distinctive craft.",
-//   },
-//   {
-//     icon: "△",
-//     title: "Valley Adventures",
-//     text: "Traditional sports, guided walks and unforgettable encounters above the clouds.",
-//   },
-// ];
