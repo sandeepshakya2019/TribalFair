@@ -1,1 +1,107 @@
-.visit { background:linear-gradient(135deg,#061120,#0f2944); color:white; }.visit .eyebrow { color:var(--cyan); }.visit-grid { display:grid; grid-template-columns:.8fr 1.2fr; gap:90px; }.visit-copy>p:not(.eyebrow) { color:#c3ceda; line-height:1.7; }.info-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(67,215,255,.24); }.info-grid article { padding:28px; background:#0d2139; }.info-grid span { color:var(--lime); font-family:"Barlow Condensed",sans-serif; font-size:1rem; font-weight:700; letter-spacing:.14em; }.info-grid h3 { margin:14px 0 8px; font-family:"Barlow Condensed",sans-serif; font-size:1.8rem; text-transform:uppercase; }.info-grid p { margin:0; color:#b7c5d4; font-size:.9rem; line-height:1.65; }
+.visit {
+  position: relative;
+  background: linear-gradient(135deg, #040c17 0%, #0d2139 50%, #081728 100%);
+  color: white;
+  overflow: hidden;
+}
+
+.visit::before {
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(67, 215, 255, 0.15),
+    transparent 70%
+  );
+  content: "";
+  pointer-events: none;
+}
+
+.visit .eyebrow {
+  color: var(--cyan);
+}
+
+.visit-grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 90px;
+  align-items: center;
+}
+
+.visit-copy > p:not(.eyebrow) {
+  color: #c3ceda;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+/* Gaming HUD info grid */
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  padding: 2px;
+  border-radius: 14px;
+  background: linear-gradient(
+    135deg,
+    rgba(67, 215, 255, 0.4),
+    rgba(196, 240, 67, 0.2) 50%,
+    rgba(67, 215, 255, 0.1)
+  );
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+
+.info-grid article {
+  position: relative;
+  padding: 32px 28px;
+  background: #09192c;
+  transition:
+    background-color 0.35s ease,
+    transform 0.35s ease;
+}
+
+.info-grid article:hover {
+  background: #0e243d;
+}
+
+.info-grid span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  border: 1px solid rgba(196, 240, 67, 0.35);
+  border-radius: 4px;
+  background: rgba(196, 240, 67, 0.08);
+  color: var(--lime);
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  box-shadow: 0 0 10px rgba(196, 240, 67, 0.15);
+}
+
+.info-grid h3 {
+  margin: 16px 0 10px;
+  color: #ffffff;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.info-grid article:hover h3 {
+  color: var(--cyan);
+}
+
+.info-grid p {
+  margin: 0;
+  color: #b7c5d4;
+  font-size: 0.92rem;
+  line-height: 1.65;
+}

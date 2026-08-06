@@ -4,10 +4,18 @@
   --cyan: #43d7ff;
   --lime: #c4f043;
   --coral: #ff5c76;
+  --gold: #f3c85c;
   --cream: #f4f7fb;
   --ink: #101827;
   --muted: #637084;
   --line: rgba(16, 24, 39, 0.13);
+
+  /* Gaming UI Design Tokens */
+  --glow-cyan: 0 0 20px rgba(67, 215, 255, 0.45);
+  --glow-lime: 0 0 20px rgba(196, 240, 67, 0.45);
+  --glow-gold: 0 0 22px rgba(243, 200, 92, 0.45);
+  --hud-border: rgba(67, 215, 255, 0.28);
+  --hud-bg: rgba(7, 16, 31, 0.88);
 }
 
 * {
@@ -18,11 +26,36 @@ html {
   scroll-behavior: smooth;
 }
 
+::selection {
+  background: var(--cyan);
+  color: #07101f;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050d18;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: linear-gradient(180deg, #164263 0%, #43d7ff 100%);
+  border: 2px solid #050d18;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--cyan);
+}
+
 body {
   margin: 0;
   background: var(--cream);
   color: var(--ink);
   font-family: Inter, Arial, sans-serif;
+  overflow-x: hidden;
 }
 
 button,
@@ -43,6 +76,7 @@ button:focus-visible,
 a:focus-visible {
   outline: 3px solid var(--cyan);
   outline-offset: 4px;
+  box-shadow: var(--glow-cyan);
 }
 
 .shell {
@@ -51,43 +85,68 @@ a:focus-visible {
 }
 
 .section {
-  padding-block: 104px;
+  position: relative;
+  padding-block: 108px;
 }
 
+/* =====================================================
+   GAMING HEADINGS & EYEBROWS
+===================================================== */
+
 .eyebrow {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
-  margin: 0 0 17px;
-  color: #147b9a;
-  font-size: 0.7rem;
+  gap: 12px;
+  margin: 0 0 18px;
+  color: #0093b8;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.74rem;
   font-weight: 800;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 
 .eyebrow::before {
-  width: 28px;
+  width: 30px;
   height: 3px;
   background: currentColor;
+  box-shadow: 0 0 10px currentColor;
   content: "";
+  transition: width 0.4s ease;
 }
 
 .eyebrow.dark {
-  color: #1a7895;
+  color: #087f9d;
 }
 
 .gold-button {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 24px;
-  padding: 14px 19px;
-  border: 0;
-  border-radius: 4px;
+  padding: 15px 24px;
+  border: 1px solid rgba(196, 240, 67, 0.6);
+  border-radius: 6px;
   background: var(--lime);
   color: #07101f;
   font-family: "Space Grotesk", Inter, sans-serif;
-  font-weight: 700;
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  box-shadow: 0 8px 25px rgba(196, 240, 67, 0.3);
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s ease,
+    background-color 0.35s ease;
+}
+
+.gold-button:hover {
+  background: #d4f85e;
+  transform: translateY(-4px) scale(1.03);
+  box-shadow:
+    0 14px 35px rgba(196, 240, 67, 0.45),
+    var(--glow-lime);
 }
 
 .section-heading {
@@ -95,12 +154,13 @@ a:focus-visible {
   grid-template-columns: 1.2fr 0.8fr;
   gap: 65px;
   align-items: end;
-  margin-bottom: 50px;
+  margin-bottom: 54px;
 }
 
 .section-heading h2,
 .intro h2,
 .visit h2 {
+  position: relative;
   margin: 0;
   font-family: "Barlow Condensed", Impact, sans-serif;
   font-size: clamp(3.4rem, 6vw, 5.6rem);
@@ -114,10 +174,19 @@ a:focus-visible {
   max-width: 470px;
   margin: 0;
   color: var(--muted);
-  line-height: 1.7;
+  font-size: 1.05rem;
+  line-height: 1.72;
 }
 
-/* Reveal section animations */
+/* =====================================================
+   GAMING SCROLL REVEAL SYSTEM
+===================================================== */
+
+.reveal-section {
+  will-change: transform, opacity, filter;
+}
+
+/* Initial Hidden State */
 .reveal-section .section-heading,
 .reveal-section .intro-copy,
 .reveal-section .intro > div:first-child,
@@ -127,28 +196,34 @@ a:focus-visible {
 .reveal-section .visit-copy,
 .reveal-section .info-grid {
   opacity: 0;
-  filter: blur(7px);
-  transform: translateY(34px);
+  filter: blur(10px);
+  transform: translateY(42px) scale(0.97);
   transition:
-    opacity 1.65s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 1.65s cubic-bezier(0.16, 1, 0.3, 1),
-    filter 1.65s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-section .intro > div:first-child {
-  transform: translateX(-34px);
+  transform: translateX(-45px) scale(0.97);
 }
 
 .reveal-section .intro-copy {
-  transform: translateX(34px);
+  transform: translateX(45px) scale(0.97);
 }
 
+/* Gaming Heading Wipe Reveal */
 .reveal-section .section-heading h2,
+.reveal-section .intro h2,
 .reveal-section .visit h2 {
-  letter-spacing: 0.12em;
-  transition: letter-spacing 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+  letter-spacing: 0.14em;
+  clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  transition:
+    letter-spacing 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    clip-path 1.1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Active Visible State Triggered on Scroll */
 .reveal-section.is-visible .section-heading,
 .reveal-section.is-visible .intro-copy,
 .reveal-section.is-visible .intro > div:first-child,
@@ -159,35 +234,64 @@ a:focus-visible {
 .reveal-section.is-visible .info-grid {
   opacity: 1;
   filter: blur(0);
-  transform: translate(0);
+  transform: translate(0) scale(1);
 }
 
 .reveal-section.is-visible .section-heading h2,
+.reveal-section.is-visible .intro h2,
 .reveal-section.is-visible .visit h2 {
   letter-spacing: 0.015em;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
 
+.reveal-section.is-visible .eyebrow::before {
+  width: 44px;
+}
+
+/* Stagger Delays for Sequential Flow */
 .reveal-section .day-tabs {
-  transition-delay: 0.3s;
+  transition-delay: 0.18s;
 }
 
 .reveal-section .programme {
-  transition-delay: 0.62s;
+  transition-delay: 0.32s;
 }
 
 .reveal-section .poster-card:nth-child(1),
 .reveal-section .info-grid {
-  transition-delay: 0.26s;
+  transition-delay: 0.12s;
 }
 
 .reveal-section .poster-card:nth-child(2) {
-  transition-delay: 0.5s;
+  transition-delay: 0.24s;
 }
 
 .reveal-section .poster-card:nth-child(3) {
-  transition-delay: 0.74s;
+  transition-delay: 0.36s;
 }
 
 .reveal-section .poster-card:nth-child(4) {
-  transition-delay: 0.98s;
+  transition-delay: 0.48s;
+}
+
+/* Reduced Motion Fallback */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-section .section-heading,
+  .reveal-section .intro-copy,
+  .reveal-section .intro > div:first-child,
+  .reveal-section .day-tabs,
+  .reveal-section .programme,
+  .reveal-section .poster-card,
+  .reveal-section .visit-copy,
+  .reveal-section .info-grid,
+  .reveal-section .section-heading h2,
+  .reveal-section .intro h2,
+  .reveal-section .visit h2 {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    clip-path: none;
+    letter-spacing: 0.015em;
+    transition: none;
+  }
 }
