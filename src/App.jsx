@@ -9,6 +9,8 @@ import Footer from "./components/Footer";
 import TeaserModal from "./components/TeaserModal";
 import Events from "./components/Events";
 
+import { Analytics } from "@vercel/analytics/react";
+
 export default function App() {
   const [teaserOpen, setTeaserOpen] = useState(false);
 
@@ -182,6 +184,8 @@ export default function App() {
           scrollToSection("schedule");
         }}
       />
+
+      <Analytics />
     </main>
   );
 }
