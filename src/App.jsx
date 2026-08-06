@@ -13,8 +13,60 @@ import { Analytics } from "@vercel/analytics/react";
 
 export default function App() {
   const [teaserOpen, setTeaserOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadingProgress, setLoadingProgress] = useState(0);
 
   const cursorRef = useRef(null);
+
+  /* ------------------------------
+     Game-style boot sequence
+  ------------------------------- */
+
+  useEffect(() => {
+    const minimumLoadTime = 2600;
+    const startedAt = performance.now();
+    let frameId;
+    let finishTimer;
+    let hideTimer;
+    let hasFinished = false;
+
+    const finishLoading = () => {
+      if (hasFinished) return;
+      hasFinished = true;
+      cancelAnimationFrame(frameId);
+
+      const elapsed = performance.now() - startedAt;
+      const remaining = Math.max(0, minimumLoadTime - elapsed);
+
+      finishTimer = window.setTimeout(() => {
+        setLoadingProgress(100);
+        hideTimer = window.setTimeout(() => setIsLoading(false), 340);
+      }, remaining);
+    };
+
+    const updateProgress = () => {
+      if (hasFinished) return;
+      const elapsed = performance.now() - startedAt;
+      // Hold just below completion until the page assets are ready.
+      setLoadingProgress(Math.min(92, Math.round((elapsed / minimumLoadTime) * 92)));
+      frameId = requestAnimationFrame(updateProgress);
+    };
+
+    updateProgress();
+
+    if (document.readyState === "complete") {
+      finishLoading();
+    } else {
+      window.addEventListener("load", finishLoading, { once: true });
+    }
+
+    return () => {
+      cancelAnimationFrame(frameId);
+      window.clearTimeout(finishTimer);
+      window.clearTimeout(hideTimer);
+      window.removeEventListener("load", finishLoading);
+    };
+  }, []);
 
   const scrollToSection = (id) =>
     document.getElementById(id)?.scrollIntoView({
@@ -26,6 +78,29 @@ export default function App() {
   ------------------------------- */
 
   useEffect(() => {
+    const headings = document.querySelectorAll(
+      ".section-heading h2, .intro h2, .visit h2",
+    );
+
+    headings.forEach((heading) => {
+      if (heading.dataset.typeReady) return;
+
+      const label = heading.textContent.trim();
+      heading.dataset.typeReady = "true";
+      heading.classList.add("typing-heading");
+      heading.setAttribute("aria-label", label);
+      heading.replaceChildren(
+        ...[...label].map((character, index) => {
+          const letter = document.createElement("span");
+          letter.className = "typing-char";
+          letter.style.setProperty("--char-index", index);
+          letter.setAttribute("aria-hidden", "true");
+          letter.textContent = character === " " ? "\u00a0" : character;
+          return letter;
+        }),
+      );
+    });
+
     const sections = [
       ...document.querySelectorAll("main > section:not(.hero)"),
     ];
@@ -140,7 +215,23 @@ export default function App() {
   }, []);
 
   return (
-    <main>
+    <main className={isLoading ? "site-loading" : "site-ready"}>
+      {isLoading && (
+        <div className="game-loader" role="status" aria-live="polite">
+          <div className="game-loader__panel">
+            <p className="game-loader__eyebrow">Tribal Fair 2026</p>
+            <h1>Preparing the arena</h1>
+            <div className="game-loader__track" aria-hidden="true">
+              <span style={{ width: `${loadingProgress}%` }} />
+            </div>
+            <div className="game-loader__meta">
+              <span>Loading festival experience</span>
+              <b>{loadingProgress}%</b>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Gaming Cursor */}
 
       <div ref={cursorRef} className="game-cursor" aria-hidden="true">

@@ -58,6 +58,130 @@ body {
   overflow-x: hidden;
 }
 
+/* =====================================================
+   GAME-STYLE PAGE BOOT
+===================================================== */
+
+.game-loader {
+  position: fixed;
+  z-index: 1000000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  padding: 24px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(22, 86, 120, 0.34), transparent 42%),
+    linear-gradient(135deg, #030a14, #071a2d 55%, #04111f);
+  color: #fff;
+}
+
+.game-loader::before,
+.game-loader::after {
+  position: absolute;
+  inset: -20%;
+  background-image:
+    linear-gradient(rgba(67, 215, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(67, 215, 255, 0.07) 1px, transparent 1px);
+  background-size: 42px 42px;
+  content: "";
+  transform: perspective(600px) rotateX(58deg) translateY(18%);
+  transform-origin: center;
+}
+
+.game-loader::after {
+  width: 36vw;
+  height: 36vw;
+  max-width: 520px;
+  max-height: 520px;
+  inset: auto;
+  border: 1px solid rgba(67, 215, 255, 0.45);
+  border-radius: 50%;
+  box-shadow: 0 0 0 22px rgba(67, 215, 255, 0.04), 0 0 70px rgba(67, 215, 255, 0.15);
+  animation: loaderOrbit 4s linear infinite;
+}
+
+.game-loader__panel {
+  position: relative;
+  z-index: 1;
+  width: min(460px, 100%);
+  padding: 32px;
+  border: 1px solid rgba(67, 215, 255, 0.32);
+  border-radius: 10px;
+  background: rgba(4, 18, 34, 0.76);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4), inset 0 1px rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  animation: loaderPanelIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.game-loader__eyebrow {
+  margin: 0 0 13px;
+  color: var(--cyan);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.game-loader h1 {
+  margin: 0 0 28px;
+  font-family: "Barlow Condensed", Impact, sans-serif;
+  font-size: clamp(2.7rem, 8vw, 4.2rem);
+  line-height: 0.85;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.game-loader__track {
+  height: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(67, 215, 255, 0.42);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.game-loader__track span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--cyan), var(--lime));
+  box-shadow: 0 0 18px var(--cyan);
+  transition: width 0.12s linear;
+}
+
+.game-loader__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 12px;
+  color: rgba(231, 241, 247, 0.76);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.game-loader__meta b { color: var(--gold); }
+
+/* Keep hero motion ready until the boot screen finishes. */
+.site-loading .header,
+.site-loading .hero-copy,
+.site-loading .hero-mascot,
+.site-loading .countdown-card,
+.site-loading .hero::after,
+.site-loading .mascot-glow {
+  animation-play-state: paused !important;
+}
+
+@keyframes loaderPanelIn {
+  from { opacity: 0; transform: translateY(22px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes loaderOrbit {
+  to { transform: rotate(360deg); }
+}
+
 button,
 a {
   font: inherit;
@@ -199,9 +323,9 @@ a:focus-visible {
   filter: blur(10px);
   transform: translateY(42px) scale(0.97);
   transition:
-    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-    filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.5s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-section .intro > div:first-child {
@@ -219,8 +343,24 @@ a:focus-visible {
   letter-spacing: 0.14em;
   clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
   transition:
-    letter-spacing 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-    clip-path 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+    letter-spacing 1.7s cubic-bezier(0.16, 1, 0.3, 1),
+    clip-path 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Character-by-character game terminal reveal for headings. */
+.reveal-section .typing-heading {
+  clip-path: none;
+}
+
+.typing-heading .typing-char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.32em);
+  transition:
+    opacity 0.3s ease,
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.35s ease;
+  transition-delay: calc(220ms + var(--char-index) * 52ms);
 }
 
 /* Active Visible State Triggered on Scroll */
@@ -244,34 +384,43 @@ a:focus-visible {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
 
+.reveal-section.is-visible .typing-heading {
+  clip-path: none;
+}
+
+.reveal-section.is-visible .typing-heading .typing-char {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .reveal-section.is-visible .eyebrow::before {
   width: 44px;
 }
 
 /* Stagger Delays for Sequential Flow */
 .reveal-section .day-tabs {
-  transition-delay: 0.18s;
+  transition-delay: 0.35s;
 }
 
 .reveal-section .programme {
-  transition-delay: 0.32s;
+  transition-delay: 0.65s;
 }
 
 .reveal-section .poster-card:nth-child(1),
 .reveal-section .info-grid {
-  transition-delay: 0.12s;
+  transition-delay: 0.25s;
 }
 
 .reveal-section .poster-card:nth-child(2) {
-  transition-delay: 0.24s;
+  transition-delay: 0.5s;
 }
 
 .reveal-section .poster-card:nth-child(3) {
-  transition-delay: 0.36s;
+  transition-delay: 0.75s;
 }
 
 .reveal-section .poster-card:nth-child(4) {
-  transition-delay: 0.48s;
+  transition-delay: 1s;
 }
 
 /* Reduced Motion Fallback */
@@ -292,6 +441,12 @@ a:focus-visible {
     transform: none;
     clip-path: none;
     letter-spacing: 0.015em;
+    transition: none;
+  }
+
+  .typing-heading .typing-char {
+    opacity: 1;
+    transform: none;
     transition: none;
   }
 }
