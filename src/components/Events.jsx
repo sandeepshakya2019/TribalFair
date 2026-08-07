@@ -36,7 +36,6 @@ export default function Events() {
                         className="event-poster-image"
                         src={event.poster}
                         alt={`${event.eventName} poster`}
-                        loading="lazy"
                       />
 
                       <span className="poster-category">{event.category}</span>
