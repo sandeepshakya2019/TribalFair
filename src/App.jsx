@@ -10,6 +10,7 @@ import TeaserModal from "./components/TeaserModal";
 import Events from "./components/Events";
 
 import { Analytics } from "@vercel/analytics/react";
+import WomenEmpowerment from "./components/WomenEmpowerment";
 
 export default function App() {
   const [teaserOpen, setTeaserOpen] = useState(false);
@@ -48,7 +49,9 @@ export default function App() {
       if (hasFinished) return;
       const elapsed = performance.now() - startedAt;
       // Hold just below completion until the page assets are ready.
-      setLoadingProgress(Math.min(92, Math.round((elapsed / minimumLoadTime) * 92)));
+      setLoadingProgress(
+        Math.min(92, Math.round((elapsed / minimumLoadTime) * 92)),
+      );
       frameId = requestAnimationFrame(updateProgress);
     };
 
@@ -258,6 +261,8 @@ export default function App() {
       </section>
 
       <About onDiscover={() => scrollToSection("schedule")} />
+
+      <WomenEmpowerment />
 
       <Schedule />
 
