@@ -1,0 +1,229 @@
+/* Shared finishing layer: restrained, consistent surfaces and motion. */
+:root {
+  --surface: #ffffff;
+  --surface-soft: #f8fafc;
+  --shadow-soft: 0 14px 38px rgba(15, 35, 57, 0.09);
+  --shadow-hover: 0 22px 48px rgba(15, 35, 57, 0.15);
+  --radius-lg: 20px;
+}
+
+body {
+  background:
+    radial-gradient(circle at 100% 0%, rgba(67, 215, 255, 0.08), transparent 26rem),
+    linear-gradient(180deg, #f8fbfd 0%, var(--cream) 58%, #f9fafb 100%);
+}
+
+.section {
+  padding-block: clamp(76px, 9vw, 112px);
+}
+
+.section-heading,
+.women-section-heading {
+  position: relative;
+}
+
+.intro,
+.schedule,
+.visit {
+  isolation: isolate;
+}
+
+.intro > *,
+.visit-grid {
+  position: relative;
+  z-index: 1;
+}
+
+.section-heading > p,
+.women-heading-description,
+.intro-copy,
+.visit-copy > p:not(.eyebrow) {
+  color: #566678;
+}
+
+.intro-copy {
+  border-left-color: rgba(8, 127, 157, 0.42);
+}
+
+.intro-copy p:first-child {
+  color: #17314c;
+}
+
+.text-link,
+.view-women-poster,
+.gold-button,
+.header-nav .header-button {
+  border-radius: 10px;
+}
+
+.main-poster-frame,
+.programme,
+.poster-card,
+.info-grid article,
+.women-featured-poster {
+  box-shadow: var(--shadow-soft);
+}
+
+.poster-card,
+.info-grid article,
+.women-featured-poster {
+  border-color: rgba(16, 37, 60, 0.12);
+}
+
+@media (hover: hover) {
+  .poster-card:hover,
+  .info-grid article:hover,
+  .women-featured-poster.is-visible:hover {
+    box-shadow: var(--shadow-hover);
+  }
+
+  .section-heading:hover .eyebrow::before,
+  .women-section-heading:hover .eyebrow::before,
+  .intro:hover .eyebrow::before {
+    width: 44px;
+  }
+}
+
+/* Section-specific reveal states keep motion meaningful without being distracting. */
+@media (prefers-reduced-motion: no-preference) {
+  .intro::before,
+  .schedule::after,
+  .visit::after {
+    position: absolute;
+    z-index: 0;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(67, 215, 255, 0.13), transparent 68%);
+    content: "";
+    filter: blur(4px);
+    pointer-events: none;
+    animation: polishAmbientDrift 11s ease-in-out infinite;
+  }
+
+  .intro::before {
+    top: 8%;
+    left: -170px;
+  }
+
+  .schedule::after {
+    right: -170px;
+    bottom: 8%;
+    animation-delay: -4s;
+  }
+
+  .visit::after {
+    bottom: 4%;
+    left: -150px;
+    animation-delay: -7s;
+  }
+
+  .main-poster-frame {
+    animation: polishFrameIn 0.8s 0.15s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .programme,
+  .info-grid article {
+    transition:
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.35s ease,
+      border-color 0.35s ease;
+  }
+
+  .info-grid article:nth-child(2) {
+    transition-delay: 80ms;
+  }
+
+  .info-grid article:nth-child(3) {
+    transition-delay: 160ms;
+  }
+
+  .info-grid article:nth-child(4) {
+    transition-delay: 240ms;
+  }
+
+  .poster-card.is-visible:nth-child(odd),
+  .reveal-section.is-visible .info-grid article:nth-child(odd) {
+    animation: polishCardFloat 6s ease-in-out 1.2s infinite;
+  }
+
+  .poster-card.is-visible:nth-child(even),
+  .reveal-section.is-visible .info-grid article:nth-child(even) {
+    animation: polishCardFloat 6s ease-in-out 2.5s infinite reverse;
+  }
+
+  .women-featured-poster.is-visible {
+    animation: polishCardFloat 7s ease-in-out calc(var(--poster-delay) + 1.4s) infinite;
+  }
+
+  .women-featured-poster.is-visible:hover,
+  .poster-card.is-visible:hover {
+    animation: none;
+  }
+}
+
+@keyframes polishFrameIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes polishAmbientDrift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.65;
+  }
+
+  50% {
+    transform: translate3d(28px, -22px, 0) scale(1.08);
+    opacity: 1;
+  }
+}
+
+@keyframes polishCardFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@media (max-width: 900px) {
+  .section {
+    padding-block: 76px;
+  }
+
+  .intro {
+    gap: 36px;
+  }
+
+  .section-heading {
+    margin-bottom: 38px;
+  }
+}
+
+@media (max-width: 600px) {
+  .section {
+    padding-block: 68px;
+  }
+
+  .intro-copy {
+    padding-left: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .main-poster-frame {
+    animation: none;
+  }
+}

@@ -20,13 +20,13 @@ export default function Events() {
 
           return (
             <div className="event-category-group" key={category}>
-              {/* <div className="category-heading">
+              <div className="category-heading">
                 <span className="category-line" />
                 <h3>{category} Events</h3>
                 <span className="category-count">
                   {categoryEvents.length} Events
                 </span>
-              </div> */}
+              </div>
 
               <div className="poster-grid">
                 {categoryEvents.map((event) => (

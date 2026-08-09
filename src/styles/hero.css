@@ -279,7 +279,9 @@
   filter: drop-shadow(0 28px 30px rgba(0, 0, 0, 0.38));
   opacity: 0;
   transform: translateX(-50%) translateY(40px) scale(0.94);
-  animation: mascotEntrance 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.35s forwards;
+  animation:
+    mascotEntrance 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.35s forwards,
+    mascotIdle 5.8s ease-in-out 1.8s infinite;
 }
 
 .mascot-glow {
@@ -446,6 +448,22 @@
     opacity: 1;
     filter: blur(0);
     transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+
+/* A calm idle motion keeps the mascot alive after its entrance animation. */
+@keyframes mascotIdle {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0) rotate(-0.6deg) scale(1);
+  }
+
+  35% {
+    transform: translateX(-50%) translateY(-10px) rotate(0.7deg) scale(1.012);
+  }
+
+  70% {
+    transform: translateX(-50%) translateY(-4px) rotate(-0.35deg) scale(1.005);
   }
 }
 

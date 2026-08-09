@@ -72,7 +72,7 @@ export default function WomenEmpowerment() {
 
               <div className="women-image-shine" />
 
-              <span className="women-theme-badge">{item.category}</span>
+              {/* <span className="women-theme-badge">{item.category}</span> */}
 
               <span className="women-poster-number">
                 {String(index + 1).padStart(2, "0")}
