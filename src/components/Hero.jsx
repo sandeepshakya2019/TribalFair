@@ -30,7 +30,7 @@ export default function Hero({ onWatchTeaser, onExploreSchedule }) {
           </button>
 
           <button className="outline-button" onClick={onExploreSchedule}>
-            Explore Games <span>→</span>
+            Explore More <span>→</span>
           </button>
         </div>
 

@@ -11,6 +11,7 @@ import Events from "./components/Events";
 
 import { Analytics } from "@vercel/analytics/react";
 import WomenEmpowerment from "./components/WomenEmpowerment";
+import MainPoster from "./components/MainPoster";
 
 export default function App() {
   const [teaserOpen, setTeaserOpen] = useState(false);
@@ -259,6 +260,8 @@ export default function App() {
           onExploreSchedule={() => scrollToSection("schedule")}
         />
       </section>
+
+      <MainPoster />
 
       <About onDiscover={() => scrollToSection("schedule")} />
 

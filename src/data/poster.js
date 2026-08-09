@@ -3,6 +3,12 @@
 export const eventPosters = [
   {
     id: 2,
+    eventName: "Date Wise Schedule",
+    category: "Date Wise Schedule",
+    poster: "/images/posters/date-wise.png",
+  },
+  {
+    id: 2,
     eventName: "Cricket",
     category: "Sports",
     poster: "/images/posters/Sports/cricket-poster.png",
