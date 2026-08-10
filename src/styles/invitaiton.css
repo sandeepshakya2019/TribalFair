@@ -1,0 +1,698 @@
+/* =========================================
+   Invitation modal
+========================================= */
+
+.invitation-modal {
+  position: fixed;
+  z-index: 10000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  padding: 24px;
+  background:
+    radial-gradient(circle at 50% 15%, rgba(43, 70, 97, 0.35), transparent 42%),
+    rgba(2, 9, 20, 0.92);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  animation: invitationModalFade 0.35s ease both;
+}
+
+.invitation-modal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 38px 38px;
+  mask-image: linear-gradient(to bottom, #000, transparent 90%);
+}
+
+/* =========================================
+   Dialog
+========================================= */
+
+.invitation-dialog {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: min(1040px, 100%);
+  height: min(860px, calc(100dvh - 48px));
+  min-height: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(247, 210, 129, 0.25);
+  border-radius: 22px;
+  background: rgba(7, 17, 30, 0.94);
+  box-shadow:
+    0 36px 100px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  animation: invitationDialogReveal 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* =========================================
+   Header
+========================================= */
+
+.invitation-dialog__header {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 24px;
+  border-bottom: 1px solid rgba(112, 66, 33, 0.16);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 253, 248, 0.99),
+    rgba(248, 237, 217, 0.98)
+  );
+}
+
+.invitation-dialog__header::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #d99c3f,
+    #f3d68c,
+    #d99c3f,
+    transparent
+  );
+}
+
+.invitation-dialog__title p {
+  margin: 0 0 5px;
+  color: #956025;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.67rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.invitation-dialog__title h2 {
+  margin: 0;
+  color: #492918;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.7rem);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.invitation-dialog__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.invitation-dialog__actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid rgba(112, 66, 33, 0.24);
+  border-radius: 10px;
+  color: #754420;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.invitation-dialog__actions a:hover {
+  color: #fff;
+  background: #754420;
+  box-shadow: 0 8px 20px rgba(73, 41, 24, 0.2);
+  transform: translateY(-2px);
+}
+
+.invitation-close {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(112, 66, 33, 0.22);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.82);
+  color: #492918;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  font-size: 1.8rem;
+  line-height: 1;
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease,
+    transform 0.3s ease;
+}
+
+.invitation-close span {
+  display: block;
+  margin-top: -3px;
+}
+
+.invitation-close:hover {
+  color: #3e260f;
+  background: #e9bc63;
+  transform: rotate(90deg);
+}
+
+.invitation-close:focus-visible,
+.invitation-nav-button:focus-visible,
+.invitation-dialog__actions a:focus-visible {
+  outline: 3px solid rgba(233, 188, 99, 0.7);
+  outline-offset: 3px;
+}
+
+/* =========================================
+   Page area
+========================================= */
+
+.invitation-pages {
+  display: grid;
+  flex: 1;
+  min-height: 0;
+  grid-template-rows: 12px minmax(0, 1fr) 64px;
+  gap: 12px;
+  padding: 16px 24px 18px;
+}
+
+.invitation-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+.invitation-progress span {
+  width: 30px;
+  height: 3px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.24);
+  transition:
+    width 0.35s ease,
+    background-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.invitation-progress span.is-active {
+  width: 48px;
+  background: #f2cd77;
+  box-shadow: 0 0 12px rgba(242, 205, 119, 0.55);
+}
+
+/* =========================================
+   Page-turn animation
+========================================= */
+
+.invitation-page-stage {
+  position: relative;
+  display: grid;
+  min-height: 0;
+  place-items: center;
+  overflow: hidden;
+  perspective: 1800px;
+  isolation: isolate;
+}
+
+.invitation-page-stage::before {
+  content: "";
+  position: absolute;
+  bottom: 1%;
+  left: 50%;
+  width: min(580px, 80%);
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  filter: blur(24px);
+  transform: translateX(-50%);
+}
+
+.invitation-page-turn {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  will-change: transform, opacity, filter;
+}
+
+.invitation-page-turn--entering {
+  z-index: 2;
+  transform-origin: left center;
+  animation: invitationPageFlipIn 0.56s cubic-bezier(0.32, 0, 0.12, 1) both;
+}
+
+.invitation-page-turn--leaving {
+  z-index: 3;
+  transform-origin: left center;
+  animation: invitationPageFlipOut 0.56s cubic-bezier(0.55, 0.06, 0.68, 0.19)
+    both;
+}
+
+.invitation-page-stage--backward .invitation-page-turn--entering,
+.invitation-page-stage--backward .invitation-page-turn--leaving {
+  transform-origin: right center;
+}
+
+.invitation-page-stage--backward .invitation-page-turn--entering {
+  animation-name: invitationPageFlipInBackward;
+}
+
+.invitation-page-stage--backward .invitation-page-turn--leaving {
+  animation-name: invitationPageFlipOutBackward;
+}
+
+/* =========================================
+   Invitation image
+========================================= */
+
+.invitation-page {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  text-align: center;
+}
+
+.invitation-page img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: calc(100% - 30px);
+  object-fit: contain;
+  border: 1px solid rgba(255, 237, 191, 0.5);
+  border-radius: 9px;
+  background: #fff8e9;
+  box-shadow:
+    0 26px 62px rgba(0, 0, 0, 0.58),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  user-select: none;
+  -webkit-user-drag: none;
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease;
+}
+
+.invitation-page img:hover {
+  box-shadow:
+    0 34px 74px rgba(0, 0, 0, 0.68),
+    0 0 26px rgba(233, 188, 99, 0.1);
+  transform: translateY(-5px) scale(1.008);
+}
+
+.invitation-page figcaption {
+  margin-top: 9px;
+  color: rgba(255, 237, 191, 0.85);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+/* =========================================
+   Pagination
+========================================= */
+
+.invitation-pagination {
+  display: grid;
+  height: 64px;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.invitation-pagination p {
+  display: flex;
+  min-width: 140px;
+  flex-direction: column;
+  gap: 3px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-family: "Space Grotesk", sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.invitation-pagination p strong {
+  color: #f7d281;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+}
+
+.invitation-pagination p span {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+}
+
+.invitation-nav-button {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 10px 15px;
+  border: 1px solid rgba(247, 210, 129, 0.32);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.07);
+  color: #f7d281;
+  cursor: pointer;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.74rem;
+  font-weight: 800;
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.invitation-nav-button--next {
+  justify-self: end;
+}
+
+.invitation-nav-button:not(:disabled):hover {
+  border-color: #e9bc63;
+  color: #3e260f;
+  background: #e9bc63;
+}
+
+.invitation-nav-button--next:not(:disabled):hover {
+  transform: translateX(4px);
+}
+
+.invitation-nav-button--previous:not(:disabled):hover {
+  transform: translateX(-4px);
+}
+
+.invitation-nav-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+
+/* =========================================
+   Animations
+========================================= */
+
+@keyframes invitationModalFade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes invitationDialogReveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes invitationPageFlipIn {
+  from {
+    opacity: 0;
+    filter: brightness(0.68);
+    transform: rotateY(-82deg) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    filter: brightness(1);
+    transform: rotateY(0) scale(1);
+  }
+}
+
+@keyframes invitationPageFlipOut {
+  from {
+    opacity: 1;
+    filter: brightness(1);
+    transform: rotateY(0) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    filter: brightness(0.65);
+    transform: rotateY(82deg) scale(0.97);
+  }
+}
+
+@keyframes invitationPageFlipInBackward {
+  from {
+    opacity: 0;
+    filter: brightness(0.68);
+    transform: rotateY(82deg) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    filter: brightness(1);
+    transform: rotateY(0) scale(1);
+  }
+}
+
+@keyframes invitationPageFlipOutBackward {
+  from {
+    opacity: 1;
+    filter: brightness(1);
+    transform: rotateY(0) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    filter: brightness(0.65);
+    transform: rotateY(-82deg) scale(0.97);
+  }
+}
+
+/* =========================================
+   Tablet
+========================================= */
+
+@media (max-width: 768px) {
+  .invitation-modal {
+    padding: 12px;
+  }
+
+  .invitation-dialog {
+    height: calc(100dvh - 24px);
+    border-radius: 18px;
+  }
+
+  .invitation-dialog__header {
+    padding: 15px 17px;
+  }
+
+  .invitation-dialog__actions a {
+    display: none;
+  }
+
+  .invitation-dialog__title h2 {
+    font-size: 2rem;
+  }
+
+  .invitation-pages {
+    grid-template-rows: 10px minmax(0, 1fr) 58px;
+    gap: 10px;
+    padding: 13px 14px 12px;
+  }
+
+  .invitation-pagination {
+    height: 58px;
+  }
+}
+
+/* =========================================
+   Mobile
+========================================= */
+
+@media (max-width: 520px) {
+  .invitation-modal {
+    padding: 8px;
+  }
+
+  .invitation-dialog {
+    height: calc(100dvh - 16px);
+    max-height: calc(100svh - 16px);
+    border-radius: 15px;
+  }
+
+  .invitation-dialog__header {
+    min-height: 66px;
+    padding: 13px 14px;
+  }
+
+  .invitation-dialog__title p {
+    margin-bottom: 3px;
+    font-size: 0.58rem;
+  }
+
+  .invitation-dialog__title h2 {
+    font-size: 1.75rem;
+  }
+
+  .invitation-close {
+    width: 38px;
+    height: 38px;
+    font-size: 1.65rem;
+  }
+
+  .invitation-pages {
+    grid-template-rows: 8px minmax(0, 1fr) 54px;
+    gap: 8px;
+    padding: 11px 10px 9px;
+  }
+
+  .invitation-progress {
+    gap: 5px;
+  }
+
+  .invitation-progress span {
+    width: 18px;
+  }
+
+  .invitation-progress span.is-active {
+    width: 32px;
+  }
+
+  .invitation-page img {
+    max-width: calc(100vw - 38px);
+    max-height: calc(100% - 26px);
+    border-radius: 6px;
+  }
+
+  .invitation-page img:hover {
+    transform: none;
+  }
+
+  .invitation-page figcaption {
+    margin-top: 7px;
+    font-size: 0.57rem;
+  }
+
+  .invitation-pagination {
+    height: 54px;
+    grid-template-columns: 46px 1fr 46px;
+    gap: 8px;
+  }
+
+  .invitation-nav-button {
+    width: 44px;
+    min-height: 44px;
+    padding: 0;
+    border-radius: 50%;
+    font-size: 1rem;
+  }
+
+  .invitation-nav-text {
+    display: none;
+  }
+
+  .invitation-pagination p {
+    min-width: 0;
+  }
+
+  .invitation-pagination p strong {
+    font-size: 0.66rem;
+  }
+
+  .invitation-pagination p span {
+    overflow: hidden;
+    max-width: 150px;
+    margin-inline: auto;
+    font-size: 0.54rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+/* =========================================
+   Very small-height devices
+========================================= */
+
+@media (max-height: 600px) {
+  .invitation-dialog__header {
+    min-height: 56px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .invitation-dialog__title p {
+    display: none;
+  }
+
+  .invitation-pages {
+    grid-template-rows: 6px minmax(0, 1fr) 48px;
+    padding-top: 8px;
+    padding-bottom: 7px;
+  }
+
+  .invitation-pagination {
+    height: 48px;
+  }
+
+  .invitation-page figcaption {
+    display: none;
+  }
+
+  .invitation-page img {
+    max-height: 100%;
+  }
+}
+
+/* =========================================
+   Reduced motion accessibility
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .invitation-modal,
+  .invitation-dialog,
+  .invitation-page-turn--entering,
+  .invitation-page-turn--leaving {
+    animation-duration: 0.01ms !important;
+  }
+
+  .invitation-page img,
+  .invitation-close,
+  .invitation-nav-button,
+  .invitation-progress span {
+    transition-duration: 0.01ms !important;
+  }
+}

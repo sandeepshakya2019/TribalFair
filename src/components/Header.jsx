@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Header({ onNavigate }) {
+export default function Header({ onNavigate, onOpenInvitation }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = (section) => {
     onNavigate?.(section);
@@ -54,6 +54,15 @@ export default function Header({ onNavigate }) {
           </button>
           <button type="button" onClick={() => navigate("events")}>
             Events
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              onOpenInvitation?.();
+              setMenuOpen(false);
+            }}
+          >
+            Invitation
           </button>
           {/* <button type="button" onClick={() => navigate("visit")}>
             Visitor Guide

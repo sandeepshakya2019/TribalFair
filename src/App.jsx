@@ -8,6 +8,7 @@ import VisitorInfo from "./components/VisitorInfo";
 import Footer from "./components/Footer";
 import TeaserModal from "./components/TeaserModal";
 import Events from "./components/Events";
+import InvitationModal from "./components/InvitationModal";
 
 import { Analytics } from "@vercel/analytics/react";
 import WomenEmpowerment from "./components/WomenEmpowerment";
@@ -15,6 +16,7 @@ import MainPoster from "./components/MainPoster";
 
 export default function App() {
   const [teaserOpen, setTeaserOpen] = useState(false);
+  const [invitationOpen, setInvitationOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [loadingProgress, setLoadingProgress] = useState(0);
 
@@ -253,7 +255,10 @@ export default function App() {
         <div className="hero-image" />
         <div className="hero-shade" />
 
-        <Header onNavigate={scrollToSection} />
+        <Header
+          onNavigate={scrollToSection}
+          onOpenInvitation={() => setInvitationOpen(true)}
+        />
 
         <Hero
           onWatchTeaser={() => setTeaserOpen(true)}
@@ -282,6 +287,11 @@ export default function App() {
           setTeaserOpen(false);
           scrollToSection("schedule");
         }}
+      />
+
+      <InvitationModal
+        isOpen={invitationOpen}
+        onClose={() => setInvitationOpen(false)}
       />
 
       <Analytics />
