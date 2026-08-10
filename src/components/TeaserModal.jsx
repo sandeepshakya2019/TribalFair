@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 export default function TeaserModal({ isOpen, onClose }) {
-  const YOUTUBE_VIDEO_ID = "";
+  const YOUTUBE_VIDEO_ID = "opyoEyJdWco";
 
   useEffect(() => {
     if (!isOpen) return undefined;
