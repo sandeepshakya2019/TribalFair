@@ -49,7 +49,18 @@ export const eventPosters = [
     category: "Sports",
     poster: "/images/posters/Sports/badminton-poster.jpg",
   },
-
+  {
+    id: 8,
+    eventName: "Cycle Marathon",
+    category: "Sports",
+    poster: "/images/posters/Sports/Cycle-marathon-poster.png",
+  },
+  {
+    id: 8,
+    eventName: "Slow Cycle",
+    category: "Sports",
+    poster: "/images/posters/Sports/Slow-Race-poster.png",
+  },
   {
     id: 9,
     eventName: "Cleanliness Drive",
