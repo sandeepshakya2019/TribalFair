@@ -6,7 +6,7 @@ export const fairDays = [
     date: "14 Aug",
     title: "The Valley Welcomes You",
     events: [
-      ["TBA", "Marathon", "-"],
+      // ["TBA", "Marathon", "-"],
       ["07:00", "Cycle Marathon", "-"],
       [
         "15:00",
