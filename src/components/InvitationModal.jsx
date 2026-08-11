@@ -14,7 +14,7 @@ const invitationPages = [
     alt: "Tribal Fair 2026 main attractions",
   },
   {
-    src: "/images/invitation/invitation-page-3.jpg",
+    src: "/images/invitation/invitation-page-3.png",
     label: "Your Invitation",
     alt: "Official invitation for Tribal Fair 2026",
   },

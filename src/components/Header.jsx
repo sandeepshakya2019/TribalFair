@@ -55,7 +55,7 @@ export default function Header({ onNavigate, onOpenInvitation }) {
           <button type="button" onClick={() => navigate("events")}>
             Events
           </button>
-          <button
+          {/* <button
             type="button"
             onClick={() => {
               onOpenInvitation?.();
@@ -63,7 +63,7 @@ export default function Header({ onNavigate, onOpenInvitation }) {
             }}
           >
             Invitation
-          </button>
+          </button> */}
           {/* <button type="button" onClick={() => navigate("visit")}>
             Visitor Guide
           </button> */}
