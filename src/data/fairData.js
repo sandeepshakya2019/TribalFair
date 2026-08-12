@@ -7,7 +7,7 @@ export const fairDays = [
     title: "The Valley Welcomes You",
     events: [
       // ["TBA", "Marathon", "-"],
-      ["07:00", "Cycle Marathon", "-"],
+      // ["07:00", "Cycle Marathon", "-"],
       [
         "15:00",
         "Shobha Yatra",
@@ -30,7 +30,7 @@ export const fairDays = [
     title: "Independence Day Celebrations",
     events: [
       ["TBA", "Mehndi Competition", "-"],
-      ["TBA", "Cycle Marathon", "-"],
+      // ["TBA", "Cycle Marathon", "-"],
       [
         "10:58",
         "Unfurling of the National Flag by the Chief Guest",

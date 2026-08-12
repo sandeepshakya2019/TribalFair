@@ -9,6 +9,12 @@ export const eventPosters = [
   },
   {
     id: 2,
+    eventName: "Shobha Yatra",
+    category: "Cultural",
+    poster: "/images/posters/Cultural/Shobha-Yatra-Poster.png",
+  },
+  {
+    id: 2,
     eventName: "Cricket",
     category: "Sports",
     poster: "/images/posters/Sports/cricket-poster.png",
