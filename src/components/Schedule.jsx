@@ -15,6 +15,11 @@ export default function Schedule() {
           <p>
             Explore the programme day by day. Final timings and venues will be
             shared closer to the fair.
+            <br />
+            <b style={{ color: "red" }}>
+              Please Check the Individual Poster for More Details like Venue and
+              Contact
+            </b>
           </p>
         </div>
         <div className="day-tabs" role="tablist" aria-label="Fair days">

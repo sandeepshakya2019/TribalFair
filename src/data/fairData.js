@@ -29,7 +29,11 @@ export const fairDays = [
     date: "15 Aug",
     title: "Independence Day Celebrations",
     events: [
-      ["TBA", "Mehndi Competition", "-"],
+      [
+        "TBA",
+        "Mehndi Competition",
+        "For Venue Please refer to the below posters",
+      ],
       // ["TBA", "Cycle Marathon", "-"],
       [
         "10:58",
