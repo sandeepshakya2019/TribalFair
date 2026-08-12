@@ -12,6 +12,10 @@ export default function Events() {
         </div>
       </div>
 
+      <p className="events-note">
+        Please check the individual event posters for complete details.
+      </p>
+
       <div className="event-categories">
         {categories.map((category) => {
           const categoryEvents = eventPosters.filter(
@@ -22,9 +26,12 @@ export default function Events() {
             <div className="event-category-group" key={category}>
               <div className="category-heading">
                 <span className="category-line" />
+
                 <h3>{category} Events</h3>
+
                 <span className="category-count">
-                  {categoryEvents.length} Events
+                  {categoryEvents.length}{" "}
+                  {categoryEvents.length === 1 ? "Event" : "Events"}
                 </span>
               </div>
 
