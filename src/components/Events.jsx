@@ -57,8 +57,8 @@ export default function Events() {
                         className="event-poster-image"
                         src={event.poster}
                         alt={`${event.eventName} event poster`}
-                        draggable="false"
-                        decoding="async"
+                        // draggable="false"
+                        // decoding="async"
                       />
 
                       <span className="poster-category">{event.category}</span>

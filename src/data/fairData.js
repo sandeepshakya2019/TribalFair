@@ -10,7 +10,7 @@ export const fairDays = [
     events: [
       ["07:00", "Slow Cycle Race", "Police Ground"],
       ["09:30", "Cycle Marathon Race", "Police Ground"],
-      ["13:00–14:00", "Lunch", "Old Circuit House"],
+      // ["13:00–14:00", "Lunch", "Old Circuit House"],
       ["14:00", "Assembly for Shobha Yatra", "Durga Mata Mandir"],
       [
         "15:00",
@@ -60,11 +60,11 @@ export const fairDays = [
     fullDate: "16 August 2026",
     title: "Sports Finale and Closing Ceremony",
     events: [
-      ["09:30", "Sports Activities", "Police Ground"],
-      ["10:00", "Sports Activities", "Police Ground"],
-      ["11:30", "Sports Activities", "Police Ground"],
+      ["09:30-14:00", "Sports Activities", "Police Ground"],
+      // ["10:00", "Sports Activities", "Police Ground"],
+      // ["11:30", "Sports Activities", "Police Ground"],
       // ["13:00", "Lunch", "Old Circuit House"],
-      ["14:00", "Sports Activities", "Police Ground"],
+      // ["14:00", "Sports Activities", "Police Ground"],
       ["15:00", "Sports Final", "Police Ground"],
       ["15:30", "Prize Distribution Ceremony", "Police Ground"],
       ["16:00", "Vote of Thanks", "Police Ground"],
