@@ -1,236 +1,900 @@
+/* =========================================================
+   Schedule Section
+   ========================================================= */
+
 .schedule {
   position: relative;
-  background: linear-gradient(135deg, #050e1c 0%, #0d213b 50%, #09172a 100%);
-  color: white;
   overflow: hidden;
+  padding: 110px 0;
+  background:
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(67, 215, 255, 0.12),
+      transparent 34%
+    ),
+    linear-gradient(145deg, #07182a 0%, #0b2137 52%, #0d2b43 100%);
+  color: #ffffff;
 }
 
 .schedule::before {
+  content: "";
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(
-      circle at 85% 10%,
-      rgba(67, 215, 255, 0.18),
-      transparent 35%
-    ),
-    radial-gradient(
-      circle at 15% 90%,
-      rgba(196, 240, 67, 0.08),
-      transparent 35%
-    );
+  opacity: 0.17;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 58px 58px;
+  pointer-events: none;
+}
+
+.schedule::after {
   content: "";
+  position: absolute;
+  right: -150px;
+  bottom: -180px;
+  width: 440px;
+  height: 440px;
+  border-radius: 50%;
+  background: rgba(196, 240, 67, 0.09);
+  filter: blur(90px);
   pointer-events: none;
 }
 
 .schedule .shell {
   position: relative;
-  z-index: 2;
+  z-index: 1;
 }
 
-.schedule .section-heading > p {
-  color: #a9b8c9;
+/* =========================================================
+   Section Heading
+   ========================================================= */
+
+.schedule-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 510px);
+  align-items: end;
+  gap: 70px;
+  margin-bottom: 55px;
 }
 
 .schedule .eyebrow {
-  color: var(--cyan);
+  margin: 0 0 12px;
+  color: #43d7ff;
 }
 
-/* Day tabs gaming interface */
+.schedule-heading h2 {
+  max-width: 700px;
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(2.8rem, 6vw, 5.2rem);
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+}
+
+.schedule-introduction > p {
+  margin: 0 0 18px;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* Schedule notice */
+
+.schedule-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid rgba(196, 240, 67, 0.25);
+  border-left: 4px solid #c4f043;
+  border-radius: 10px;
+  background: rgba(196, 240, 67, 0.08);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.schedule-notice-icon {
+  display: grid;
+  flex: 0 0 25px;
+  width: 25px;
+  height: 25px;
+  place-items: center;
+  border-radius: 50%;
+  background: #c4f043;
+  color: #0d263b;
+  font-family: Georgia, serif;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.schedule-notice p {
+  margin: 1px 0 0;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 0.87rem;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+/* =========================================================
+   Day Tabs
+   ========================================================= */
+
 .day-tabs {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(4, 13, 26, 0.4);
-  backdrop-filter: blur(8px);
-  border-radius: 8px 8px 0 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 22px;
 }
 
-.day-tabs button {
+.day-tab {
   position: relative;
-  padding: 20px 16px;
-  border: 0;
-  border-bottom: 3px solid transparent;
-  background: none;
-  color: #8da2ba;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  min-width: 0;
+  overflow: hidden;
+  padding: 20px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.055);
+  color: rgba(255, 255, 255, 0.7);
+  font: inherit;
   text-align: left;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   transition:
-    color 0.3s ease,
-    border-color 0.3s ease,
-    background-color 0.3s ease;
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    background-color 0.35s ease,
+    color 0.35s ease;
 }
 
-.day-tabs button::before {
+.day-tab::before {
+  content: "";
   position: absolute;
-  top: 0;
+  right: 0;
+  bottom: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    180deg,
-    rgba(67, 215, 255, 0.06),
-    transparent 80%
-  );
-  opacity: 0;
-  content: "";
-  transition: opacity 0.3s ease;
-}
-
-.day-tabs button:hover::before {
-  opacity: 1;
-}
-
-.day-tabs button:hover {
-  color: #ffffff;
-}
-
-.day-tabs button.active {
-  border-bottom-color: var(--lime);
-  color: #ffffff;
-  background: rgba(196, 240, 67, 0.06);
-}
-
-.day-tabs button.active::after {
-  position: absolute;
-  bottom: -3px;
-  left: 50%;
-  width: 40px;
   height: 3px;
-  transform: translateX(-50%);
-  background: var(--lime);
-  box-shadow: 0 0 12px var(--lime);
-  content: "";
+  background: linear-gradient(90deg, #43d7ff, #c4f043);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.day-tabs span {
+.day-tab:hover {
+  border-color: rgba(67, 215, 255, 0.35);
+  background: rgba(255, 255, 255, 0.09);
+  color: #ffffff;
+  transform: translateY(-3px);
+}
+
+.day-tab.active {
+  border-color: rgba(196, 240, 67, 0.4);
+  background: #ffffff;
+  color: #0d263b;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+}
+
+.day-tab.active::before {
+  transform: scaleX(1);
+}
+
+.day-tab > span:first-child {
   display: block;
-  margin-bottom: 6px;
-  color: var(--cyan);
-  font-family: "Space Grotesk", sans-serif;
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
+  margin-bottom: 5px;
+  font-size: 0.68rem;
+  font-weight: 750;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
 }
 
-.day-tabs b {
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: 1.75rem;
-  font-weight: 800;
-  letter-spacing: 0.02em;
+.day-tab strong {
+  grid-column: 1;
+  display: block;
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  line-height: 1;
 }
 
-/* Programme grid */
+.day-tab-arrow {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  font-size: 1.3rem;
+  opacity: 0.55;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.day-tab:hover .day-tab-arrow,
+.day-tab.active .day-tab-arrow {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+.day-tab:focus-visible {
+  outline: 3px solid rgba(67, 215, 255, 0.45);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   Programme
+   ========================================================= */
+
 .programme {
   display: grid;
-  grid-template-columns: 0.7fr 1.3fr;
-  gap: 70px;
-  padding-top: 48px;
+  grid-template-columns: minmax(230px, 0.75fr) minmax(0, 2fr);
+  gap: 45px;
+  padding: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 20px;
+  background: rgba(3, 15, 27, 0.54);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  animation: programmeReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.programme-title span {
+.programme:focus {
+  outline: none;
+}
+
+.programme:focus-visible {
+  outline: 3px solid rgba(67, 215, 255, 0.35);
+  outline-offset: 4px;
+}
+
+.programme-title {
+  padding: 6px 20px 6px 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.programme-title > span {
   display: inline-block;
-  padding: 4px 10px;
-  border: 1px solid rgba(67, 215, 255, 0.3);
-  border-radius: 4px;
-  background: rgba(67, 215, 255, 0.08);
-  color: var(--cyan);
-  font-family: "Space Grotesk", sans-serif;
-  font-size: 0.76rem;
-  font-weight: 800;
-  letter-spacing: 0.15em;
+  margin-bottom: 15px;
+  color: #43d7ff;
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
 }
 
 .programme-title h3 {
-  margin: 18px 0;
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: 3.2rem;
-  font-weight: 800;
-  line-height: 0.92;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  background: linear-gradient(180deg, #ffffff 0%, #a8c2de 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1;
+  letter-spacing: -0.035em;
 }
 
-/* Event rows with gaming HUD highlight */
+.programme-title p {
+  margin: 20px 0 0;
+  color: rgba(255, 255, 255, 0.53);
+  font-size: 0.78rem;
+  font-weight: 650;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   Event List
+   ========================================================= */
+
+.event-list {
+  display: grid;
+}
+
 .event-row {
   position: relative;
   display: grid;
-  grid-template-columns: 90px 1fr 34px;
-  gap: 20px;
+  grid-template-columns: minmax(105px, 145px) minmax(0, 1fr) auto;
   align-items: center;
-  padding: 20px 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 6px;
+  gap: 25px;
+  padding: 22px 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  transform: translateY(16px);
+  animation: scheduleEventReveal 0.5s ease forwards;
+  animation-delay: calc(var(--event-index, 0) * 80ms + 120ms);
   transition:
-    background-color 0.3s ease,
-    transform 0.3s ease,
-    border-color 0.3s ease;
+    padding 0.3s ease,
+    background-color 0.3s ease;
 }
 
-.event-row::before {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 3px;
-  background: var(--cyan);
-  box-shadow: 0 0 10px var(--cyan);
-  opacity: 0;
-  content: "";
-  transition: opacity 0.3s ease;
+.event-row:first-child {
+  padding-top: 8px;
+}
+
+.event-row:last-child {
+  border-bottom: 0;
+  padding-bottom: 8px;
 }
 
 .event-row:hover {
-  background: rgba(255, 255, 255, 0.04);
-  transform: translateX(6px);
-  border-top-color: rgba(67, 215, 255, 0.3);
+  padding-right: 14px;
+  padding-left: 14px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.045);
 }
 
-.event-row:hover::before {
-  opacity: 1;
+.event-time span {
+  display: block;
+  margin-bottom: 5px;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.6rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
-.event-row time {
-  color: var(--lime);
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: 1.45rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  text-shadow: 0 0 10px rgba(196, 240, 67, 0.3);
+.event-time time {
+  color: #c4f043;
+  font-size: 0.95rem;
+  font-weight: 750;
+  line-height: 1.35;
 }
 
-.event-row h4 {
-  margin: 0 0 5px;
+.event-details {
+  min-width: 0;
+}
+
+.event-details h4 {
+  margin: 0;
   color: #ffffff;
   font-size: 1.05rem;
   font-weight: 700;
-  transition: color 0.3s ease;
+  line-height: 1.35;
 }
 
-.event-row:hover h4 {
-  color: var(--cyan);
+.event-details p {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 7px 0 0;
+  color: rgba(255, 255, 255, 0.54);
+  font-size: 0.82rem;
+  line-height: 1.45;
 }
 
-.event-row p {
-  margin: 0;
-  color: #9eafc1;
-  font-size: 0.85rem;
+.event-details p span {
+  flex: 0 0 auto;
+  color: #43d7ff;
 }
 
 .event-number {
-  color: var(--cyan);
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.13);
+  font-size: 1.8rem;
   font-weight: 800;
-  text-align: right;
-  opacity: 0.6;
+  line-height: 1;
+  transition: color 0.3s ease;
 }
 
 .event-row:hover .event-number {
-  opacity: 1;
-  text-shadow: 0 0 10px var(--cyan);
+  color: rgba(196, 240, 67, 0.38);
+}
+
+/* =========================================================
+   Animations
+   ========================================================= */
+
+@keyframes programmeReveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scheduleEventReveal {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+
+@media (max-width: 980px) {
+  .schedule-heading {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 30px;
+  }
+
+  .schedule-introduction {
+    max-width: 650px;
+  }
+
+  .programme {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .programme-title {
+    padding: 0 0 28px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+}
+
+@media (max-width: 700px) {
+  .schedule {
+    padding: 80px 0;
+  }
+
+  .schedule-heading {
+    margin-bottom: 38px;
+  }
+
+  .schedule-heading h2 {
+    font-size: clamp(2.7rem, 13vw, 4rem);
+  }
+
+  .day-tabs {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .day-tab {
+    grid-template-columns: auto 1fr auto;
+    gap: 15px;
+    padding: 16px 18px;
+  }
+
+  .day-tab > span:first-child {
+    grid-column: 1;
+    margin: 0;
+  }
+
+  .day-tab strong {
+    grid-column: 2;
+    text-align: left;
+  }
+
+  .day-tab-arrow {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .programme {
+    padding: 25px 20px;
+    border-radius: 16px;
+  }
+
+  .event-row {
+    grid-template-columns: 90px minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .event-number {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .schedule {
+    padding: 65px 0;
+  }
+
+  .schedule-notice {
+    padding: 13px;
+  }
+
+  .programme {
+    gap: 22px;
+    padding: 22px 15px;
+  }
+
+  .programme-title {
+    padding-bottom: 22px;
+  }
+
+  .programme-title h3 {
+    font-size: 2rem;
+  }
+
+  .event-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 18px 5px;
+  }
+
+  .event-row:first-child {
+    padding-top: 5px;
+  }
+
+  .event-time {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .event-time span {
+    margin: 0;
+  }
+
+  .event-time time {
+    font-size: 0.9rem;
+  }
+
+  .event-details h4 {
+    font-size: 1rem;
+  }
+
+  .event-details p {
+    font-size: 0.78rem;
+  }
+}
+
+@media (hover: none) {
+  .day-tab:hover,
+  .event-row:hover {
+    transform: none;
+  }
+
+  .event-row:hover {
+    padding-right: 8px;
+    padding-left: 8px;
+    background: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .programme,
+  .event-row {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .day-tab,
+  .day-tab-arrow,
+  .event-row {
+    transition: none;
+  }
+}
+
+/* =========================================================
+   Tablet
+   ========================================================= */
+
+@media (max-width: 980px) {
+  .schedule {
+    padding: 85px 0;
+  }
+
+  .schedule-heading {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 28px;
+    margin-bottom: 42px;
+  }
+
+  .schedule-heading-copy,
+  .schedule-introduction {
+    width: 100%;
+    max-width: 680px;
+  }
+
+  .programme {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 32px;
+  }
+
+  .programme-title {
+    padding: 0 0 26px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+}
+
+/* =========================================================
+   Mobile
+   ========================================================= */
+
+@media (max-width: 700px) {
+  .schedule {
+    width: 100%;
+    overflow: hidden;
+    padding: 68px 0;
+  }
+
+  .schedule .shell {
+    width: 100%;
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .schedule-heading {
+    display: block;
+    margin-bottom: 32px;
+  }
+
+  .schedule-heading h2 {
+    margin-top: 7px;
+    font-size: clamp(2.45rem, 12vw, 3.6rem);
+    line-height: 0.98;
+  }
+
+  .schedule-introduction {
+    margin-top: 25px;
+  }
+
+  .schedule-introduction > p {
+    margin-bottom: 14px;
+    font-size: 0.91rem;
+    line-height: 1.6;
+  }
+
+  .schedule-notice {
+    width: 100%;
+    gap: 10px;
+    padding: 12px 13px;
+  }
+
+  .schedule-notice p {
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .schedule-notice-icon {
+    flex-basis: 22px;
+    width: 22px;
+    height: 22px;
+  }
+
+  /* Keep all three days in one row */
+
+  .day-tabs {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 7px;
+    width: 100%;
+    margin-bottom: 14px;
+  }
+
+  .day-tab {
+    display: flex;
+    min-width: 0;
+    min-height: 78px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 4px;
+    padding: 12px 9px;
+    border-radius: 11px;
+  }
+
+  .day-tab > span:first-child {
+    margin: 0;
+    font-size: 0.57rem;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  .day-tab strong {
+    font-size: clamp(1rem, 4.5vw, 1.3rem);
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .day-tab-arrow {
+    display: none;
+  }
+
+  /* Programme card */
+
+  .programme {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    padding: 22px 16px;
+    border-radius: 14px;
+  }
+
+  .programme-title {
+    padding: 0 0 20px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .programme-title > span {
+    margin-bottom: 9px;
+    font-size: 0.62rem;
+  }
+
+  .programme-title h3 {
+    max-width: 100%;
+    font-size: clamp(1.75rem, 8vw, 2.4rem);
+    line-height: 1.05;
+    overflow-wrap: anywhere;
+  }
+
+  .programme-title p {
+    margin-top: 12px;
+    font-size: 0.65rem;
+  }
+
+  /* Mobile event list */
+
+  .event-list {
+    width: 100%;
+    min-width: 0;
+    padding-top: 5px;
+  }
+
+  .event-row {
+    grid-template-columns: 78px minmax(0, 1fr);
+    gap: 13px;
+    width: 100%;
+    min-width: 0;
+    padding: 17px 2px;
+  }
+
+  .event-time {
+    min-width: 0;
+  }
+
+  .event-time span {
+    margin-bottom: 4px;
+    font-size: 0.52rem;
+  }
+
+  .event-time time {
+    display: block;
+    color: #c4f043;
+    font-size: 0.8rem;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+
+  .event-details {
+    min-width: 0;
+  }
+
+  .event-details h4 {
+    max-width: 100%;
+    font-size: 0.94rem;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+
+  .event-details p {
+    max-width: 100%;
+    gap: 5px;
+    margin-top: 5px;
+    font-size: 0.72rem;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+  }
+
+  .event-number {
+    display: none;
+  }
+}
+
+/* =========================================================
+   Small Mobile
+   ========================================================= */
+
+@media (max-width: 420px) {
+  .schedule {
+    padding: 58px 0;
+  }
+
+  .schedule .shell {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+
+  .schedule-heading h2 {
+    font-size: clamp(2.25rem, 12vw, 3rem);
+  }
+
+  .schedule-notice {
+    align-items: flex-start;
+  }
+
+  .day-tabs {
+    gap: 5px;
+  }
+
+  .day-tab {
+    min-height: 70px;
+    padding: 10px 7px;
+  }
+
+  .day-tab > span:first-child {
+    font-size: 0.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .day-tab strong {
+    font-size: 0.98rem;
+  }
+
+  .programme {
+    padding: 20px 13px;
+  }
+
+  .event-row {
+    grid-template-columns: 70px minmax(0, 1fr);
+    gap: 10px;
+    padding: 15px 0;
+  }
+
+  .event-time time {
+    font-size: 0.72rem;
+  }
+
+  .event-details h4 {
+    font-size: 0.88rem;
+  }
+
+  .event-details p {
+    font-size: 0.68rem;
+  }
+}
+
+/* =========================================================
+   Very Small Mobile
+   ========================================================= */
+
+@media (max-width: 340px) {
+  .day-tabs {
+    grid-template-columns: 1fr;
+  }
+
+  .day-tab {
+    min-height: 58px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+  }
+
+  .day-tab strong {
+    font-size: 1.05rem;
+  }
+
+  .event-row {
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+
+  .event-time {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .event-time span {
+    margin: 0;
+  }
+}
+
+/* Prevent hover effects on touch screens */
+
+@media (hover: none) {
+  .day-tab:hover {
+    transform: none;
+  }
+
+  .event-row:hover {
+    padding-right: 2px;
+    padding-left: 2px;
+    background: transparent;
+  }
 }

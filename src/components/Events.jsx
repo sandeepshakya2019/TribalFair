@@ -1,20 +1,26 @@
 import { eventPosters } from "../data/poster";
 
 export default function Events() {
-  const categories = [...new Set(eventPosters.map((event) => event.category))];
+  const categories = [
+    ...new Set(eventPosters.map((event) => event.category).filter(Boolean)),
+  ];
 
   return (
     <section className="events-section section shell" id="events">
-      <div className="section-heading">
-        <div>
-          <p className="eyebrow dark">Ready for the arena?</p>
-          <h2>Featured Events</h2>
-        </div>
-      </div>
+      <header className="events-header">
+        <p className="eyebrow dark">Ready for the arena?</p>
+        <h2>Featured Events</h2>
 
-      <p className="events-note">
-        Please check the individual event posters for complete details.
-      </p>
+        <p className="events-note">
+          <span className="events-note-icon" aria-hidden="true">
+            i
+          </span>
+
+          <span style={{ color: "red" }}>
+            Please check the individual event posters for complete details.
+          </span>
+        </p>
+      </header>
 
       <div className="event-categories">
         {categories.map((category) => {
@@ -23,11 +29,15 @@ export default function Events() {
           );
 
           return (
-            <div className="event-category-group" key={category}>
+            <section
+              className="event-category-group"
+              key={category}
+              aria-labelledby={`category-${category}`}
+            >
               <div className="category-heading">
-                <span className="category-line" />
+                <span className="category-line" aria-hidden="true" />
 
-                <h3>{category} Events</h3>
+                <h3 id={`category-${category}`}>{category} Events</h3>
 
                 <span className="category-count">
                   {categoryEvents.length}{" "}
@@ -36,13 +46,19 @@ export default function Events() {
               </div>
 
               <div className="poster-grid">
-                {categoryEvents.map((event) => (
-                  <article className="poster-card" key={event.id}>
+                {categoryEvents.map((event, index) => (
+                  <article
+                    className="poster-card"
+                    key={event.id}
+                    style={{ "--card-index": index }}
+                  >
                     <div className="poster-image-wrap">
                       <img
                         className="event-poster-image"
                         src={event.poster}
-                        alt={`${event.eventName} poster`}
+                        alt={`${event.eventName} event poster`}
+                        draggable="false"
+                        decoding="async"
                       />
 
                       <span className="poster-category">{event.category}</span>
@@ -58,16 +74,18 @@ export default function Events() {
                         href={event.poster}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label={`View full ${event.eventName} poster`}
+                        aria-label={`View full poster for ${event.eventName}`}
                       >
-                        View
-                        <span aria-hidden="true">↗</span>
+                        <span>View Poster</span>
+                        <span className="view-poster-arrow" aria-hidden="true">
+                          ↗
+                        </span>
                       </a>
                     </div>
                   </article>
                 ))}
               </div>
-            </div>
+            </section>
           );
         })}
       </div>

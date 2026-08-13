@@ -71,7 +71,11 @@ body {
   overflow: hidden;
   padding: 24px;
   background:
-    radial-gradient(circle at 50% 50%, rgba(22, 86, 120, 0.34), transparent 42%),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(22, 86, 120, 0.34),
+      transparent 42%
+    ),
     linear-gradient(135deg, #030a14, #071a2d 55%, #04111f);
   color: #fff;
 }
@@ -97,7 +101,9 @@ body {
   inset: auto;
   border: 1px solid rgba(67, 215, 255, 0.45);
   border-radius: 50%;
-  box-shadow: 0 0 0 22px rgba(67, 215, 255, 0.04), 0 0 70px rgba(67, 215, 255, 0.15);
+  box-shadow:
+    0 0 0 22px rgba(67, 215, 255, 0.04),
+    0 0 70px rgba(67, 215, 255, 0.15);
   animation: loaderOrbit 4s linear infinite;
 }
 
@@ -109,7 +115,9 @@ body {
   border: 1px solid rgba(67, 215, 255, 0.32);
   border-radius: 10px;
   background: rgba(4, 18, 34, 0.76);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4), inset 0 1px rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.4),
+    inset 0 1px rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(16px);
   animation: loaderPanelIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
@@ -161,7 +169,9 @@ body {
   text-transform: uppercase;
 }
 
-.game-loader__meta b { color: var(--gold); }
+.game-loader__meta b {
+  color: var(--gold);
+}
 
 /* Keep hero motion ready until the boot screen finishes. */
 .site-loading .header,
@@ -174,12 +184,20 @@ body {
 }
 
 @keyframes loaderPanelIn {
-  from { opacity: 0; transform: translateY(22px) scale(0.96); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 @keyframes loaderOrbit {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 button,
@@ -614,5 +632,98 @@ a:focus-visible {
 
   .game-cursor.is-click {
     transform: scale(0.82);
+  }
+}
+
+/* Countdown completed state */
+
+.countdown-ended {
+  display: grid;
+  min-height: 230px;
+  place-items: center;
+  border-color: rgba(196, 240, 67, 0.38);
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(196, 240, 67, 0.18),
+      transparent 42%
+    ),
+    linear-gradient(145deg, #102b43, #081a2d);
+  text-align: center;
+}
+
+.countdown-complete {
+  max-width: 500px;
+  padding: 30px 24px;
+  animation: countdownCompleteReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.countdown-celebration {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 16px;
+  place-items: center;
+  border-radius: 50%;
+  background: #c4f043;
+  color: #0d263b;
+  font-size: 1.3rem;
+  box-shadow: 0 0 0 8px rgba(196, 240, 67, 0.1);
+  animation: celebrationPulse 2.5s ease-in-out infinite;
+}
+
+.countdown-complete-label {
+  margin: 0 0 8px;
+  color: #43d7ff;
+  font-size: 0.75rem;
+  font-weight: 750;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.countdown-complete h3 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(1.6rem, 4vw, 2.3rem);
+  line-height: 1.1;
+}
+
+.countdown-complete > p:last-child {
+  max-width: 430px;
+  margin: 14px auto 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+@keyframes countdownCompleteReveal {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes celebrationPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 8px rgba(196, 240, 67, 0.1);
+  }
+
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 0 0 15px rgba(196, 240, 67, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .countdown-complete,
+  .countdown-celebration {
+    animation: none;
   }
 }
