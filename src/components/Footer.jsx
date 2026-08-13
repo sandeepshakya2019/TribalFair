@@ -104,7 +104,10 @@ export default function Footer() {
       <div className="shell footer-divider" />
 
       <div className="shell copyright">
-        <span>© 2026 NIC Keylong · District Lahaul &amp; Spiti</span>
+        <span>
+          © District Administration & NIC Keylong · District Lahaul &amp; Spiti
+          2026
+        </span>
 
         <strong>
           <i />
