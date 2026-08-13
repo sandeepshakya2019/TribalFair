@@ -111,7 +111,7 @@ export default function Footer() {
 
         <strong>
           <i />
-          Games. Culture. Glory.
+          Games. Culture. Glory
         </strong>
       </div>
     </footer>
