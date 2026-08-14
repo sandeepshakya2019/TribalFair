@@ -13,12 +13,12 @@ export const eventPosters = [
     category: "Main Attraction",
     poster: "/images/posters/Main-attractions/Main-Attr-14Aug.png",
   },
-  // {
-  //   id: 3,
-  //   eventName: "15 August",
-  //   category: "Main Attraction",
-  //   poster: "/images/posters/Main-attractions/Main-Attr-15Aug.png",
-  // },
+  {
+    id: 3,
+    eventName: "15 August",
+    category: "Main Attraction",
+    poster: "/images/posters/Main-attractions/Main-Attr-15Aug.png",
+  },
   // {
   //   id: 4,
   //   eventName: "16 August",
